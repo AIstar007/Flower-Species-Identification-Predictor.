@@ -63,12 +63,16 @@ def serve_form():
 # Prediction logic
 @app.post("/predict")
 def predict_species(features: IrisFeatures):
-    try:
-        input_data = np.array([[features.sepal_length,
-                                features.sepal_width,
-                                features.petal_length,
-                                features.petal_width]])
-        prediction = model.predict(input_data)
-        return {"predicted_species": int(prediction[0])}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    input_data = np.array([[features.sepal_length,
+                            features.sepal_width,
+                            features.petal_length,
+                            features.petal_width]])
+    prediction = model.predict(input_data)[0]
+    
+    species_map = {
+        0: "setosa",
+        1: "versicolor",
+        2: "virginica"
+    }
+
+    return {"predicted_species": species_map[int(prediction)]}
