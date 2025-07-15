@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:8000/docs"
+url = "https://flower-species-identification-predictor-1.onrender.com/docs"
 
 payload = {
     "sepal_length": 5.1,
