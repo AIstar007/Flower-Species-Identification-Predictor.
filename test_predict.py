@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:8000/predict"
+url = "http://localhost:8000/docs"
 
 payload = {
     "sepal_length": 5.1,
