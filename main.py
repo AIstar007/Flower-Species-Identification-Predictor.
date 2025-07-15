@@ -69,6 +69,6 @@ def predict_species(features: IrisFeatures):
                                 features.petal_length,
                                 features.petal_width]])
         prediction = model.predict(input_data)
-        return {"predicted_species": prediction[0]}
+        return {"predicted_species": int(prediction[0])}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
