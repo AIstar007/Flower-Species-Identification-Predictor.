@@ -64,6 +64,9 @@ docker run -p 8000:8000 iris-api
 5. Select **Docker environment**
 6. Deploy 🚀
 
+Visit: [https://flower-species-identification-predictor.onrender.com](https://flower-species-identification-predictor.onrender.com)  
+Swagger docs: [https://flower-species-identification-predictor.onrender.com/docs](https://flower-species-identification-predictor.onrender.com/docs)
+
 ---
 
 ## 📬 Prediction Endpoint
