@@ -55,7 +55,7 @@ docker run -p 8000:8000 iris-api
 
 ---
 
-## 🌍 Deployment (Render)
+## 🌍 Deployment (Render) [Optional]
 
 1. Push project to GitHub
 2. Go to [https://render.com](https://render.com)
