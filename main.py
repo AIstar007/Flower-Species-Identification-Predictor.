@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 import joblib
@@ -14,17 +14,17 @@ if not os.path.exists(model_path):
 
 model = joblib.load(model_path)
 
-# Define input schema
+# Input schema
 class IrisFeatures(BaseModel):
     sepal_length: float
     sepal_width: float
     petal_length: float
     petal_width: float
 
-# Root endpoint – serve form
+# Root form (frontend)
 @app.get("/", response_class=HTMLResponse)
 def serve_form():
-    html_content = """
+    return """
     <!DOCTYPE html>
     <html>
     <head><title>Iris Predictor</title></head>
@@ -59,14 +59,16 @@ def serve_form():
     </body>
     </html>
     """
-    return html_content
 
-# Prediction endpoint
+# Prediction logic
 @app.post("/predict")
 def predict_species(features: IrisFeatures):
-    input_data = np.array([[features.sepal_length,
-                            features.sepal_width,
-                            features.petal_length,
-                            features.petal_width]])
-    prediction = model.predict(input_data)
-    return {"predicted_species": prediction[0]}
+    try:
+        input_data = np.array([[features.sepal_length,
+                                features.sepal_width,
+                                features.petal_length,
+                                features.petal_width]])
+        prediction = model.predict(input_data)
+        return {"predicted_species": prediction[0]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
